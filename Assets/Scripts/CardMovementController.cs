@@ -2,12 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 
 public class CardMovementController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Transform returnToParent = null;
+    public Image imageCard;
+
+    private void Start() {
+        Sprite[] sprites = Resources.LoadAll<Sprite>("CharacterImages");
+          //Sprite[] sprites =   Resources.FindObjectsOfTypeAll<Sprite>();
+            imageCard.sprite = sprites[Random.RandomRange(0,sprites.Length)];
+
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("comiezo a dragear");
