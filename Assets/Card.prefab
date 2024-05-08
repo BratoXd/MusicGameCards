@@ -643,6 +643,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   returnToParent: {fileID: 0}
   imageCard: {fileID: 7773852346525361686}
+  marco: {fileID: 0}
+  fondo: {fileID: 0}
+  tipo: {fileID: 7576333026031766408}
+  nombre: {fileID: 2865604889464270191}
+  Costo: {fileID: 7335937502940474006}
+  Apodo: {fileID: 8201869662063879449}
+  MelodiaLabel: {fileID: 6191919827870224240}
+  ArmoniaLabel: {fileID: 4451069914304823372}
+  RitmoLabel: {fileID: 6497324301229437782}
+  DireccionLabel: {fileID: 6967442356282904544}
+  efectoLabel: {fileID: 6803274280809780106}
+  MelodiaScore: {fileID: 239253721035592944}
+  ArmoniaScore: {fileID: 3293324071540460294}
+  RitmoScore: {fileID: 6783188541171235804}
+  DireccionScore: {fileID: 3456483459500772706}
+  efectoScore: {fileID: 3521263753843618376}
+  dataCard: {fileID: 11400000, guid: c87c2f573e607b04391b875da61fd180, type: 2}
 --- !u!114 &7170822753699917309
 MonoBehaviour:
   m_ObjectHideFlags: 0
