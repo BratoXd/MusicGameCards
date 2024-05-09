@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/MusicCards.unity
+    guid: 2d764d2576d31f94bbd3531b6649212e
   m_configObjects: {}
