@@ -13,10 +13,6 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerClickHandler, IPoin
   public void OnDrop(PointerEventData eventData)
   {
     CardMovementController card = eventData.pointerDrag.GetComponent<CardMovementController>();
-
- 
-
-
     globalStats.EnsambleGlobalStat =  globalStats.EnsambleGlobalStat+ card.dataCard.DireccionScore;
     globalStats.EnsambleGlobalStat_TMP.text = "Poder de Ensable: " + globalStats.EnsambleGlobalStat.ToString();
 
