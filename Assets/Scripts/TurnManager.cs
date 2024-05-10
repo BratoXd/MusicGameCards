@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
+    int TotalRounds = 3;
     public int turnCount = 0; // Contador de turnos
     public int roundCount = 0; // Contador de rondas
     public Player currentPlayer; // Jugador actual
     public List<Player> players; // Lista de jugadores
-    public TextMeshProUGUI CurrentRound;
+    public TextMeshProUGUI[] CurrentRound_TMP;
     void Start()
     {
         // Inicializa el juego
@@ -17,12 +18,13 @@ public class TurnManager : MonoBehaviour
         startTurn();
     }
 
-    void startTurn ()
+    void startTurn()
     {
-        currentPlayer.buttonChangeTurn.interactable = true;
-        currentPlayer.startTurn();
+        //  currentPlayer.buttonChangeTurn.interactable = true;
+        currentPlayer.turnOverFalse();
         currentPlayer.RechargeEnergy();
         currentPlayer.DrawCards();
+        currentPlayer.buttonChangeTurn.interactable = true;
     }
 
     void Update()
@@ -34,19 +36,41 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-   
-    void EndTurn()
-    {        
+    void disableCurrentPlayerCards()
+    {
         currentPlayer.buttonChangeTurn.interactable = false;
+        CardMovementController[] allplayercards = currentPlayer.GetComponentsInChildren<CardMovementController>();
+        foreach (CardMovementController card in allplayercards)
+        {
+            card.enabled = false;
+        }
+    }
+    void EndTurn()
+    {
+        disableCurrentPlayerCards();
 
         // Actualiza el contador de turnos y cambia al siguiente jugador
-        turnCount++;    
-        currentPlayer = players[turnCount % players.Count];
+        turnCount++;
 
+        currentPlayer.turnOverFalse();
         // Comprueba si se ha completado una ronda
         if (turnCount % players.Count == 0)
         {
             EndRound();
+        }
+        if (roundCount < TotalRounds)
+        {
+            currentPlayer = players[turnCount % players.Count];
+            startTurn();
+        }
+
+    }
+
+    void refreshCurrentRoundText()
+    {
+        foreach (var CurrentRoundLabel in CurrentRound_TMP)
+        {
+            CurrentRoundLabel.text = "Ronda Actual: " + roundCount.ToString();
         }
     }
 
@@ -55,9 +79,9 @@ public class TurnManager : MonoBehaviour
     {
         // Actualiza el contador de rondas
         roundCount++;
-        CurrentRound.text = "Ronda Actual : " + roundCount;
+        refreshCurrentRoundText();
         // Si es la última ronda, los puntos de aplausos valen doble
-        if (roundCount == 10) // Asume que hay 10 rondas en un juego
+        if (roundCount == TotalRounds) // Asume que hay 10 rondas en un juego
         {
             foreach (Player player in players)
             {
@@ -90,5 +114,32 @@ public class TurnManager : MonoBehaviour
             Debug.Log(player.name + " ha obtenido " + player.GetApplausePoints() + " puntos de aplausos.");
         }
         currentPlayer.setText_TMP();
+        showWinnerLabel();
+        finaldisabledPlayerCards();
     }
+
+    void finaldisabledPlayerCards()
+    {
+        foreach (Player player in players)
+        {
+            player.buttonChangeTurn.interactable = false;
+            CardMovementController[] allplayercards = player.GetComponentsInChildren<CardMovementController>();
+            foreach (CardMovementController card in allplayercards)
+            {
+                card.enabled = false;
+            }
+        }
+    }
+
+    void showWinnerLabel()
+    {
+
+        WinnerLabel.text = "El ganador es: " + currentPlayer.name;
+        WinnerLabel.gameObject.SetActive(true);
+
+        // Muestra la etiqueta del ganador
+    }
+
+    public TextMeshProUGUI WinnerLabel;
+
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,8 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI energyLabel;
     public    CardGenerator cardGenerator;
     public Button buttonChangeTurn;
+
+    public TMP_EditorPanelUI HandPanel;
     void Start()
     {
         // Inicializa el jugador
@@ -22,13 +25,13 @@ public class Player : MonoBehaviour
         turnOver = false;
     }
 
-  public  void startTurn()
+  public  void turnOverFalse()
     {
         // Inicia el turno del jugador
         turnOver = false;
     }
        
-    public void EndTurn()
+    public void TurnOverTrue()
     {
         // Indica que el turno del jugador ha terminado
         turnOver = true;
@@ -56,6 +59,7 @@ public class Player : MonoBehaviour
     public void DrawCards()
     {
         cardGenerator.Generator(5);
+        
     }
 
     public void DoubleApplausePoints()
