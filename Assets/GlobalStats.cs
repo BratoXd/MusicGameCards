@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class GlobalStats : MonoBehaviour
 {
+    public TextMeshProUGUI EnergiaGlobalStat_TMP;
+    public TextMeshProUGUI AplausosGlobalStat_TMP;
+
+
+    public int EnergiaGlobalStat;
+    public int AplausosGlobalStat;
 
     public int EnsambleGlobalStat;
     public int RitmoGlobalStat;
@@ -16,21 +22,11 @@ public class GlobalStats : MonoBehaviour
     public TextMeshProUGUI MelodiasGlobalStat_TMP;
     // Start is called before the first frame update
 
-
-    void setGlobalStat()
-    {
-
-
-    }
-
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        EnsambleGlobalStat = 0;
+        RitmoGlobalStat = 0;
+        ArmoniasGlobalStat = 0;
+        MelodiasGlobalStat = 0;
     }
 }

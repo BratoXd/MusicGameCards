@@ -58,7 +58,7 @@ public class TurnManager : MonoBehaviour
         {
             EndRound();
         }
-        if (roundCount < TotalRounds)
+        if (roundCount < TotalRounds && !gameOver)
         {
             currentPlayer = players[turnCount % players.Count];
             startTurn();
@@ -95,11 +95,17 @@ public class TurnManager : MonoBehaviour
             if (player.GetApplausePoints() >= 60)
             {
                 Debug.Log(player.name + " ha ganado el juego!");
+                   calculateApplausePoints();
+                   gameOver = true;
+                   return;
                 // Termina el juego y celebra la victoria del jugador
             }
             else if (player.GetApplausePoints() <= 0)
             {
                 Debug.Log(player.name + " ha perdido el juego.");
+                   calculateApplausePoints();
+                   gameOver = true;
+                   return;
                 // Termina el juego y maneja la derrota del jugador
             }
 
@@ -113,9 +119,25 @@ public class TurnManager : MonoBehaviour
         {
             Debug.Log(player.name + " ha obtenido " + player.GetApplausePoints() + " puntos de aplausos.");
         }
+
+
         currentPlayer.setText_TMP();
         showWinnerLabel();
         finaldisabledPlayerCards();
+    }
+
+    string calculatewinner()
+    {
+        Player winner = players[0];
+        foreach (Player player in players)
+        {
+            if (player.GetApplausePoints() > winner.GetApplausePoints())
+            {
+                winner = player;
+            }
+        }
+        return winner.name;
+        Debug.Log("El ganador es: " + winner.name);
     }
 
     void finaldisabledPlayerCards()
@@ -134,12 +156,14 @@ public class TurnManager : MonoBehaviour
     void showWinnerLabel()
     {
 
-        WinnerLabel.text = "El ganador es: " + currentPlayer.name;
+        WinnerLabel.text = "El ganador es: " + calculatewinner() + " con " + currentPlayer.GetApplausePoints() + " puntos de aplausos.";
         WinnerLabel.gameObject.SetActive(true);
 
         // Muestra la etiqueta del ganador
     }
 
+
+    bool gameOver = false;
     public TextMeshProUGUI WinnerLabel;
 
 }

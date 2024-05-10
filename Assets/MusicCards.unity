@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &63026675
 RectTransform:
   m_ObjectHideFlags: 0
@@ -643,7 +643,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 229847986}
   m_OnClick:
     m_PersistentCalls:
@@ -965,7 +965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &383257440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1217,7 +1217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &389871816
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2162,7 +2162,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &653870853
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2451,7 +2451,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 769981117}
   m_OnClick:
     m_PersistentCalls:
@@ -2523,7 +2523,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &774497529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3590,7 +3590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &934734900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3603,6 +3603,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a21ccddbfdfbff49982f985c2dc6034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnergiaGlobalStat_TMP: {fileID: 1325537708}
+  AplausosGlobalStat_TMP: {fileID: 1300200196}
+  EnergiaGlobalStat: 0
+  AplausosGlobalStat: 0
   EnsambleGlobalStat: 0
   RitmoGlobalStat: 0
   ArmoniasGlobalStat: 0
@@ -3650,7 +3654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &937369378
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3686,6 +3690,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a21ccddbfdfbff49982f985c2dc6034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnergiaGlobalStat_TMP: {fileID: 828569866}
+  AplausosGlobalStat_TMP: {fileID: 596017757}
+  EnergiaGlobalStat: 0
+  AplausosGlobalStat: 0
   EnsambleGlobalStat: 0
   RitmoGlobalStat: 0
   ArmoniasGlobalStat: 0
@@ -3845,7 +3853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &982750799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4380,6 +4388,7 @@ MonoBehaviour:
   CurrentRound_TMP:
   - {fileID: 111690477}
   - {fileID: 971764464}
+  WinnerLabel: {fileID: 904455480}
 --- !u!1 &1040055887
 GameObject:
   m_ObjectHideFlags: 0
@@ -4443,6 +4452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b423328430cb2e4c811b801a0ef56e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalStats: {fileID: 934734900}
   clapsLabel: {fileID: 1300200196}
   energyLabel: {fileID: 1325537708}
   cardGenerator: {fileID: 1386460411}
@@ -5163,7 +5173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1642234276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5345,6 +5355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b423328430cb2e4c811b801a0ef56e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalStats: {fileID: 937369379}
   clapsLabel: {fileID: 596017757}
   energyLabel: {fileID: 828569866}
   cardGenerator: {fileID: 820755170}
@@ -5905,7 +5916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1937183409
 RectTransform:
   m_ObjectHideFlags: 0
