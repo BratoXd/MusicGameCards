@@ -14,42 +14,20 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerClickHandler, IPoin
   public zoneType Zone;
   Player playerCard;
   Player playerZone;
-
+  CardMovementController card;
   public void OnDrop(PointerEventData eventData)
   {
+    Debug.Log("OnDrop");
 
-Debug.Log("OnDrop");
-    CardMovementController card = eventData.pointerDrag.GetComponent<CardMovementController>();
-    playerCard = card.GetComponentInParent<Player>();
     playerZone = this.GetComponentInParent<Player>();
-    card.InitialZone = this.Zone;
-
-    if (card.InitialZone == zoneType.Mano && this.Zone == zoneType.BattleZone)
-    {
-      globalStats.EnergiaGlobalStat = globalStats.EnergiaGlobalStat - card.dataCard.Costo;
-      globalStats.EnergiaGlobalStat_TMP.text = "Energia: " + globalStats.EnergiaGlobalStat.ToString();
-
-      globalStats.AplausosGlobalStat = globalStats.AplausosGlobalStat + card.dataCard.RitmoScore + card.dataCard.ArmoniaScore + card.dataCard.MelodiaScore;
-      globalStats.AplausosGlobalStat_TMP.text = "Aplausos: " + globalStats.AplausosGlobalStat.ToString();
-
-
-    }
-
-    if (card.InitialZone == zoneType.BattleZone && this.Zone == zoneType.Mano)
-    {
-      globalStats.EnergiaGlobalStat = globalStats.EnergiaGlobalStat + card.dataCard.Costo;
-      globalStats.EnergiaGlobalStat_TMP.text = "Energia: " + globalStats.EnergiaGlobalStat.ToString();
-
-      globalStats.AplausosGlobalStat = globalStats.AplausosGlobalStat - card.dataCard.RitmoScore - card.dataCard.ArmoniaScore - card.dataCard.MelodiaScore;
-      globalStats.AplausosGlobalStat_TMP.text = "Aplausos: " + globalStats.AplausosGlobalStat.ToString();
-
-    }
+    card = eventData.pointerDrag.GetComponent<CardMovementController>();
+    playerCard = card.GetComponentInParent<Player>();
+    setGlobalStats();
     playerCard.validateEnergyCard();
+    card.InitialZone = this.Zone;
 
     if (TurnManager.Instance.currentPhase == TurnPhase.Attack)
     {
-
-
       Debug.Log("Soy carta del jugador" + card.currentPlayer + " y estoy en la zona de batalla" + this.gameObject.name + " que pertenece al jugador" + playerZone);
       if (card.currentPlayer != playerZone)
       {
@@ -75,20 +53,38 @@ Debug.Log("OnDrop");
       Destroy(cardZoneDefender.gameObject);
       //   returnCardAtackToInitPosition(card);
     }
- else if (card.dataCard.calculatePower() < cardZoneDefender.dataCard.calculatePower())
+    else if (card.dataCard.calculatePower() < cardZoneDefender.dataCard.calculatePower())
     {
       Destroy(card.gameObject);
     }
   }
 
-  void returnCardAtackToInitPosition(CardMovementController card)
+
+
+  void setGlobalStats()
   {
 
-    card.transform.SetParent(card.returnToParent);
+    if (card.InitialZone == zoneType.Mano && this.Zone == zoneType.BattleZone)
+    {
+      globalStats.EnergiaGlobalStat = globalStats.EnergiaGlobalStat - card.dataCard.Costo;
+      globalStats.EnergiaGlobalStat_TMP.text = "Energia: " + globalStats.EnergiaGlobalStat.ToString();
+
+      globalStats.AplausosGlobalStat = globalStats.AplausosGlobalStat + card.dataCard.RitmoScore + card.dataCard.ArmoniaScore + card.dataCard.MelodiaScore;
+      globalStats.AplausosGlobalStat_TMP.text = "Aplausos: " + globalStats.AplausosGlobalStat.ToString();
+
+
+    }
+
+    if (card.InitialZone == zoneType.BattleZone && this.Zone == zoneType.Mano)
+    {
+      globalStats.EnergiaGlobalStat = globalStats.EnergiaGlobalStat + card.dataCard.Costo;
+      globalStats.EnergiaGlobalStat_TMP.text = "Energia: " + globalStats.EnergiaGlobalStat.ToString();
+
+      globalStats.AplausosGlobalStat = globalStats.AplausosGlobalStat - card.dataCard.RitmoScore - card.dataCard.ArmoniaScore - card.dataCard.MelodiaScore;
+      globalStats.AplausosGlobalStat_TMP.text = "Aplausos: " + globalStats.AplausosGlobalStat.ToString();
+
+    }
   }
-
-
-
 
   public void OnPointerClick(PointerEventData eventData) { }
 

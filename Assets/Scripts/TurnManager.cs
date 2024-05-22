@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
-    
+
 
 
     public TurnPhase currentPhase = TurnPhase.Draw; // Fase de turno actual
@@ -13,7 +13,7 @@ public class TurnManager : MonoBehaviour
     public bool isAttackPhase = false; // Indica si es la fase de ataque
     public int attackPower = 0; // Poder de ataque del jugador actual  
 
-  public  int pointsToWin = 1000; // Puntos de aplausos necesarios para ganar
+    public int pointsToWin = 1000; // Puntos de aplausos necesarios para ganar
     int PointsToLose = 0; // Puntos de aplausos necesarios para perder
     public int TotalRounds = 3;
     public int turnCount = 0; // Contador de turnos
@@ -32,23 +32,25 @@ public class TurnManager : MonoBehaviour
             if (instance == null)
             {
                 instance = new TurnManager();
-           
+
             }
             return instance;
         }
     }
-    
-     private TurnManager() {
+
+    private TurnManager()
+    {
         instance = this;
         // Constructor privado
     }
 
-  
-  public  void StartAttackPhase()
+
+    public void StartAttackPhase()
     {
         currentPhase = TurnPhase.Attack;
         currentPlayer.buttonAttack.interactable = false;
-        disableCardsHandPanel();    
+        disableCardsHandPanel();
+        enableCardsStations();
         // Aquí puedes añadir lógica para permitir al jugador seleccionar cartas de ataque y calcular el poder de ataque total
     }
 
@@ -60,7 +62,24 @@ public class TurnManager : MonoBehaviour
 
 
 
+    void enableCardsStations()
+    {
+        DropZone[] atackCardStatios = currentPlayer.GetComponentsInChildren<DropZone>();
+        foreach (DropZone station in atackCardStatios)
+        {
+            if (station.Zone == zoneType.BattleZone)
+            {
+                var activatedCard = station.GetComponentInChildren<CardMovementController>();
+                if (activatedCard != null)
+                {
+                    activatedCard.enabled = true;
+                }
+            }
+        }
 
+
+
+    }
 
 
 
@@ -85,7 +104,7 @@ public class TurnManager : MonoBehaviour
 
     void Start()
     {
-         currentPhase = TurnPhase.Draw;
+        currentPhase = TurnPhase.Draw;
         // Inicializa el juego
         currentPlayer = players[0]; // El primer jugador comienza
         startTurn();
@@ -99,7 +118,7 @@ public class TurnManager : MonoBehaviour
         currentPlayer.RechargeEnergy();
         currentPlayer.DrawCards();
         currentPlayer.buttonChangeTurn.interactable = true;
-      
+
     }
 
 
@@ -123,13 +142,13 @@ public class TurnManager : MonoBehaviour
             currentPlayer = players[turnCount % players.Count];
             startTurn();
         }
-           currentPlayer.buttonAttack.interactable = true;
+        currentPlayer.buttonAttack.interactable = true;
     }
 
 
     void disableCardsHandPanel()
     {
-       CardMovementController [] cardsOnHand = currentPlayer.HandPanel.GetComponentsInChildren<CardMovementController>();
+        CardMovementController[] cardsOnHand = currentPlayer.HandPanel.GetComponentsInChildren<CardMovementController>();
         foreach (CardMovementController card in cardsOnHand)
         {
             card.enabled = false;
