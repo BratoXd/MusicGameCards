@@ -9,7 +9,11 @@ using UnityEngine.UI;
 
 public class CardMovementController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public zoneType InitialZone;
+
+    public Player currentPlayer;
     public Transform returnToParent = null;
+        public Transform NewParent = null;
     public Image imageCard;
     public Image marco;
     public Image fondo;
@@ -35,9 +39,8 @@ public class CardMovementController : MonoBehaviour, IBeginDragHandler, IDragHan
 
         DataCard[] dataCards = Resources.LoadAll<DataCard>("DataCards");
 
+
         dataCard = dataCards[Random.RandomRange(0, dataCards.Length)];
-
-
         imageCard.sprite = dataCard.imageCard;
         marco = dataCard.marco;
         fondo = dataCard.fondo;
@@ -50,26 +53,25 @@ public class CardMovementController : MonoBehaviour, IBeginDragHandler, IDragHan
           RitmoLabel.text = dataCard.RitmoLabel;
           DireccionLabel.text = dataCard.DireccionLabel; */
         efectoLabel.text = dataCard.efectoLabel;
-        MelodiaScore.text = dataCard.MelodiaScore.ToString(); ;
-        ArmoniaScore.text = dataCard.ArmoniaScore.ToString(); ;
-        RitmoScore.text = dataCard.RitmoScore.ToString(); ;
-        DireccionScore.text = dataCard.DireccionScore.ToString(); ;
-        efectoScore.text = dataCard.efectoScore.ToString(); ;
+        MelodiaScore.text = dataCard.MelodiaScore.ToString();
+        ArmoniaScore.text = dataCard.ArmoniaScore.ToString();
+        RitmoScore.text = dataCard.RitmoScore.ToString();
+        DireccionScore.text = dataCard.DireccionScore.ToString();
+        efectoScore.text = dataCard.efectoScore.ToString();
+        currentPlayer = GetComponentInParent<Player>();
     }
     private void Start()
     {
         setvaluesCurrentCard();
-
-
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
+        InitialZone = this.transform.parent.GetComponent<DropZone>().Zone;
         Debug.Log("comiezo a dragear");
         returnToParent = this.transform.parent;
         this.transform.SetParent(this.transform.parent.parent);
         GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
-
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -77,12 +79,17 @@ public class CardMovementController : MonoBehaviour, IBeginDragHandler, IDragHan
         this.transform.position = eventData.position;
     }
 
-
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("Termindo de  dragear");
-        this.transform.SetParent(returnToParent);
-        GetComponent<CanvasGroup>().blocksRaycasts = true;
+        if (TurnManager.Instance.currentPhase != TurnPhase.Attack)
+        {
+            this.transform.SetParent(NewParent);
+            GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }else {
+              this.transform.SetParent(returnToParent);
+            GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
     }
     // Start is called before the first frame update
 

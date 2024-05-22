@@ -20,13 +20,38 @@ public class GlobalStats : MonoBehaviour
     public TextMeshProUGUI RitmoGlobalStat_TMP;
     public TextMeshProUGUI ArmoniasGlobalStat_TMP;
     public TextMeshProUGUI MelodiasGlobalStat_TMP;
+
+
+
     // Start is called before the first frame update
+
+
+ public static GlobalStats instance;
+void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+           // Destroy(gameObject);
+        }
+    }
+
 
     void Start()
     {
+            
+
         EnsambleGlobalStat = 0;
         RitmoGlobalStat = 0;
         ArmoniasGlobalStat = 0;
         MelodiasGlobalStat = 0;
     }
+
+   
+
+
 }

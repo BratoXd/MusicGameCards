@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class CardGenerator : MonoBehaviour
 {
+
+    public Player player;
     public GameObject PrefabCard;
     public Transform parentHandCard;
 
@@ -23,8 +25,10 @@ public class CardGenerator : MonoBehaviour
         {
             GameObject CurrentCard = Instantiate(PrefabCard);
             CurrentCard.transform.SetParent(parentHandCard);
+            
         }
     }
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,4 +44,10 @@ public class CardGenerator : MonoBehaviour
             Generator(1);
         }
     }
+
+
+
+
+
+
 }

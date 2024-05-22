@@ -7,6 +7,8 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "NewDataCard", menuName = "Scriptable Objects/Card", order = 1)]
 public class DataCard : ScriptableObject
 {
+
+      public zoneType CurrentCardZone;
   public Image marco;
   public Image fondo;
   public Sprite imageCard;
@@ -27,5 +29,9 @@ public class DataCard : ScriptableObject
   public int DireccionScore;
   public int efectoScore;
 
+
+  public int calculatePower(){
+    return MelodiaScore + ArmoniaScore + RitmoScore + DireccionScore + efectoScore;
+  }
 
 }
